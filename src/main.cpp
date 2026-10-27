@@ -122,6 +122,29 @@ int main() {
         player.update();
         // camera
 
+        sf::Vector2f playerWindow = camera.worldToWindow(player.position);
+
+        float playerX = playerWindow.x;
+        float leftSoft = WINDOW_WIDTH * SOFT_LIMIT_PERCENT;
+        float rightSoft = WINDOW_WIDTH * (1.f - SOFT_LIMIT_PERCENT);
+        float leftHard = WINDOW_WIDTH * HARD_LIMIT_PERCENT;
+        float rightHard = WINDOW_WIDTH * (1.f - HARD_LIMIT_PERCENT);
+
+        if (playerX < leftHard) {
+            camera.translateWindow({playerX - leftHard, 0.f});
+        } else if (playerX > rightHard) {
+            camera.translateWindow({playerX - rightHard, 0.f});
+        } else if (playerX < leftSoft) {
+            camera.translateWindow({
+                SOFT_CAMERA_ALPHA * (playerX - leftSoft), 0.f
+            });
+        } else if (playerX > rightSoft) {
+            camera.translateWindow({
+                SOFT_CAMERA_ALPHA * (playerX - rightSoft), 0.f
+            });
+        }
+
+
         // TODO: Remove this line and replace it with code that determines if the player's (center)
         // is between the two green lines (open space), in the soft exclusion zones (between the
         // green and red lines), or in the hard exclusion zones (beyond either of the red lines).
