@@ -161,7 +161,7 @@ int main() {
         //
         // Use SOFT_LIMIT_PERCENT and HARD_LIMIT_PERCENT to parameterize the green and red
         // line positions.
-        camera.setCameraCenter({player.position.x, WINDOW_HEIGHT * 0.5f});
+        //camera.setCameraCenter({player.position.x, WINDOW_HEIGHT * 0.5f});
 
         worldView.setCenter(camera.getCameraCenter());
         window.clear(sf::Color::Black);
